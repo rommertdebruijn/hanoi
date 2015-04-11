@@ -37,7 +37,7 @@ public class TowersOfHanoiRenderer {
                 if (tower.size() >= height) { // if tower goes (at least) this high
                     disksInPosition.add(tower.getDisk(height - 1)); // ... then store the disk that is in this position
                 } else {
-                    disksInPosition.add(null); // else store null
+                    disksInPosition.add(0); // else store an empty disk
                 }
             }
             positionToDisks.put(height, disksInPosition); // store position->the list of disks that are in that position
@@ -46,19 +46,14 @@ public class TowersOfHanoiRenderer {
     }
 
     private String renderDisk(Integer disk) {
-        if (disk == null) {
-            // null integer is considered an empty disk
-            disk = 0;
-        }
-
         int nrOfSpaces = nrOfDisks - disk;
-        String diskString = "^";
-        for (int i=0;i<disk;i++) {
-            diskString = "=" + diskString + "=";
+        StringBuilder b = new StringBuilder("^"); // center of the tower
+        for (int i=0;i<disk;i++) { // render the disk...
+            b.insert(0, "=").append("=");
         }
-        for (int i=0;i<nrOfSpaces;i++) {
-            diskString = " " + diskString + " ";
+        for (int i=0;i<nrOfSpaces;i++) { //... then pad with whitespace
+            b.insert(0, " ").append(" ");
         }
-        return diskString;
+        return b.toString();
     }
 }
