@@ -10,12 +10,12 @@ import java.util.List;
  */
 public class Tower {
 
-    private List<Integer> disks = new ArrayList<Integer>();
+    private List<Integer> disks = new ArrayList<>();
     private String name;
 
     public Tower(String name, Integer... disk) {
         this.name = name;
-        disks = new ArrayList(Arrays.asList(disk));
+        disks = new ArrayList<>(Arrays.asList(disk));
     }
 
 
@@ -44,9 +44,8 @@ public class Tower {
 
         Tower tower = (Tower) o;
 
-        if (!name.equals(tower.name)) return false;
+        return name.equals(tower.name);
 
-        return true;
     }
 
     @Override
@@ -70,5 +69,9 @@ public class Tower {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getDisk(int index) {
+        return disks.get(index);
     }
 }

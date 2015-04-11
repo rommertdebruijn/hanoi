@@ -11,8 +11,10 @@ public class TowersOfHanoi {
 
     private int nrOfMoves = 0;
     private List<Tower> towers = new ArrayList<>();
+    private int nrOfDisks;
 
     public TowersOfHanoi(int nrOfDisks) {
+        this.nrOfDisks = nrOfDisks;
         Integer[] startingDisks = new Integer[nrOfDisks];
         for (int index=0, disk=nrOfDisks;disk>=1;index++, disk--) {
             startingDisks[index]=disk;
@@ -32,7 +34,7 @@ public class TowersOfHanoi {
         to.addDisk(disk);
 
         nrOfMoves++;
-        System.out.println(String.format("[%s] Move disk %s from tower %s to tower %s. Results in %s",
+        System.out.println(String.format("[%s] Move disk %s from tower %s to tower %s. Results in \n%s",
                 nrOfMoves, disk, from.getName(), to.getName(), this.toString()));
     }
 
@@ -56,8 +58,8 @@ public class TowersOfHanoi {
 
     /**
      * Find the Tower that is neither the given from Tower, nor the given to Tower
-     * @param from
-     * @param to
+     * @param from the From Tower
+     * @param to the To Tower
      * @return the remaining Tower
      */
     private Tower determineStashColumn(Tower from, Tower to) {
@@ -66,7 +68,7 @@ public class TowersOfHanoi {
 
     @Override
     public String toString() {
-        return towers.toString();
+        return new TowersOfHanoiRenderer(nrOfDisks).render(towers);
     }
 
 
